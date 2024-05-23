@@ -7,10 +7,10 @@
 #define WIFI_SSID "iPhone"
 #define WIFI_PASSWORD "juanse0808"
 
-// Telegram BOT Token (Botfather)
+// Telegram BOT Token obtenido de (Botfather)
 #define BOT_TOKEN "6755160414:AAE-DD6BZbgtDH-mbuzXXrX8dsmNbafNdiw"
 
-// Use @myidbot (IDBot) para encontrar CHAT_ID
+// @myidbot (IDBot) para encontrar el ID del chat
 #define CHAT_ID "6684546714"
 
 WiFiClientSecure secured_client;
@@ -39,7 +39,7 @@ void setup() {
   Serial.print("\nConexión Wi-Fi establecida. Dirección IP: ");
   Serial.println(WiFi.localIP());
 
-  // Toma una lectura inicial del sensor de efecto Hall para establecer el valor base
+  // Toma la lectura inicial del sensor de efecto Hall para establecer el valor base
   baseHallValue = hallRead();
   Serial.print("Valor base del sensor Hall: ");
   Serial.println(baseHallValue);
@@ -51,13 +51,13 @@ void loop() {
   static unsigned long lastAlertTime = 0;
   const unsigned long alertInterval = 5000; // Intervalo de 5 segundos entre alertas
 
-  // Lee el valor del sensor de efecto Hall interno
+  // Lee el valor del sensor de efecto Hall
   int hallValue = hallRead();
 
-  // Verifica si el valor leído supera el umbral dinámico 
+  // Verifica si el valor leído supera el punto de cambio significativo
   if (hallValue > baseHallValue + thresholdOffset) {
     unsigned long currentTime = millis();
-    // Verifica si han pasado al menos 5 segundos desde la última alerta
+    // Verifica si han pasado al menos 5 segundos desde la última alerta 
     if (currentTime - lastAlertTime >= alertInterval) {
       // Si se detecta un campo magnético, envía un mensaje a través de Telegram
       bot.sendMessage(CHAT_ID, "¡Puerta ABIERTA!", "");
@@ -66,7 +66,7 @@ void loop() {
     }
   }
 
-  // Espera un breve período de tiempo antes de volver a verificar el sensor
+  // Espera antes de volver a verificar el sensor
   delay(100);
 }
 
