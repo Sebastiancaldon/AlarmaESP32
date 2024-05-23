@@ -17,7 +17,7 @@ WiFiClientSecure secured_client;
 UniversalTelegramBot bot(BOT_TOKEN, secured_client);
 
 int baseHallValue;
-const int thresholdOffset = 100; // Ajusta este valor según sea necesario
+const int thresholdOffset = 100; // Puede ser ajustado según sea necesario 
 
 void setup() {
   Serial.begin(115200);
